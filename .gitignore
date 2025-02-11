@@ -1,7 +1,6 @@
 /tmp
 /out-tsc
 .idea
-markusports-backend/node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -9,4 +8,7 @@ yarn-error.log*
 .pnp.js
 
 .vscode/*
-./markusports-backend/.env
+
+
+markusports-backend/.env
+markusports-backend/node_modules

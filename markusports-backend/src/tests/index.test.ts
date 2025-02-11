@@ -1,10 +1,5 @@
 import request from 'supertest';
-import express from 'express';
-
-const app = express();
-app.get("/", (req, res) => {
-    res.send("Hello world! This is MarkuSports.");
-});
+import app from "../app";
 
 describe('GET /', () => {
     it('should return Hello world! This is MarkuSports.', async () => {
