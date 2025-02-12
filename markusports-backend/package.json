@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Backend for Markus' online shop",
   "scripts": {
-    "dev": "nodemon src/app/index.ts",
+    "dev": "nodemon src/app/server.ts",
     "test": "jest"
   },
   "author": "",
