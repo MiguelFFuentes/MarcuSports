@@ -7,4 +7,4 @@ describe('GET /', () => {
         expect(response.text).toBe("Hello world! This is MarkuSports.");
         expect(response.status).toBe(200);
     });
-});
+})

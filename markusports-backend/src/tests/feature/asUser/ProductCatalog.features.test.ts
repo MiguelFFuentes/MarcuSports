@@ -11,4 +11,4 @@ describe('A User', () => {
 
         expect(response).toEqual(expectedProducts)
     })
-});
+})
