@@ -1,8 +1,13 @@
-import { Request, Response } from 'express';
+import {Request, Response} from 'express';
+import {ProductDto} from "../../application/dtos/ProductDto";
+import {ProductCatalogService} from "../../application/services/ProductCatalogService";
 
 export class ProductCatalogController {
 
-  async getProducts(req: Request, res: Response) {
-      throw new Error('Not implemented');
-  }
+    constructor(private productCatalogService: ProductCatalogService) {}
+
+    async getProducts(req: Request, res: Response<ProductDto[]>) {
+        const products = await this.productCatalogService.getProducts()
+        res.json(products)
+    }
 }
