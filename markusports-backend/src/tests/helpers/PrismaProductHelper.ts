@@ -1,6 +1,6 @@
-import {ProductDto} from "@productcatalog/application/dtos/ProductDto";
+import {Product as PrismaProduct} from '@prisma/client';
 
-export function getMockProductDtos(): ProductDto[] {
+export function getMockPrismaProducts(): PrismaProduct[] {
     return [
         {
             id: 1,
@@ -14,5 +14,5 @@ export function getMockProductDtos(): ProductDto[] {
             price: 19.99,
             description: "This is a product for testing"
         }
-    ]
+    ];
 }

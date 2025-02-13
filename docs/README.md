@@ -39,3 +39,16 @@ found.
 
 I used TDD as much as possible to drive my development focusing in the minimal functionality needed. Most things have 
 been tested on this project with unit tests, there are also some feature tests for the main flows.
+
+## SQL vs NoSQL
+I've decided to use SQL because of how strong and defined are the relations between the different entities. Also, since
+we have some challenges like stock,it's a better idea to handle concurrency with this approach.
+
+So the database will be MySQL.
+
+## Prisma
+Since MySQL is the chosen database, I decided to use Prisma as an ORM because it is a modern and powerful tool that
+allows all the relationships we need, and it is easy to use.
+
+## Docker
+I've prepared a docker-compose.yml file in order to have a local PostgreSQL database.
