@@ -52,3 +52,7 @@ allows all the relationships we need, and it is easy to use.
 
 ## Docker
 I've prepared a docker-compose.yml file in order to have a local PostgreSQL database.
+
+## Backend error handling
+I created a generic middleware to handle errors in the backend. As the project continues I may add some domain 
+exceptions or specific error handling. I'm aware that the error handling is not perfect yet, but it is a good start.

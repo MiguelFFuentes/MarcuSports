@@ -14,6 +14,7 @@ describe('ProductCatalogController', () => {
     let productCatalogServiceMock: SpyInstance<Promise<ProductDto[]>>
     const requestMock = {} as Request
     const responseMock = {json: jest.fn()} as unknown as Response
+    const nextMock = jest.fn()
 
     beforeEach(() => {
         const productCatalogService = new ProductCatalogService(productCatalogRepository)
@@ -23,19 +24,35 @@ describe('ProductCatalogController', () => {
     })
 
     afterEach(() => {
-        productCatalogServiceMock.mockClear()
+        jest.clearAllMocks()
     })
 
-    it('should retrieve a list of products', async () => {
-        await productCatalogController.getProducts(requestMock, responseMock)
-
-        expect(responseMock.json).toHaveBeenCalledWith(expectedProducts)
+    afterAll(() => {
+        jest.restoreAllMocks()
     })
 
-    it('should call the ProductCatalogService', async () => {
-        await productCatalogController.getProducts(requestMock, responseMock)
+    describe('getProducts', () => {
+        it('should retrieve a list of products', async () => {
+            await productCatalogController.getProducts(requestMock, responseMock, nextMock)
 
-        expect(productCatalogServiceMock).toHaveBeenCalled()
+            expect(responseMock.json).toHaveBeenCalledWith(expectedProducts)
+        })
+
+        it('should call the ProductCatalogService', async () => {
+            await productCatalogController.getProducts(requestMock, responseMock, nextMock)
+
+            expect(productCatalogServiceMock).toHaveBeenCalled()
+        })
+
+        it('should call the error handler when an error raises', async () => {
+            const error = new Error('Error retrieving products')
+            const consoleMock = jest.spyOn(console, 'error').mockImplementation()
+            productCatalogServiceMock.mockRejectedValue(error)
+
+            await productCatalogController.getProducts(requestMock, responseMock, nextMock)
+
+            expect(nextMock).toHaveBeenCalled()
+            expect(consoleMock).toHaveBeenCalledWith('Error in GET /products:', error)
+        });
     })
-
 })
