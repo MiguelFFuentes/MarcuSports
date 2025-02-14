@@ -18,5 +18,6 @@ export function fromPrismaProductToDomain(prismaProduct: PrismaProduct): Product
         name: prismaProduct.name,
         description: prismaProduct.description,
         price: prismaProduct.price,
+        image: prismaProduct.image || undefined,
     }
 }

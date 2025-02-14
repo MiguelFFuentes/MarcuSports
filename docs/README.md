@@ -56,3 +56,9 @@ I've prepared a docker-compose.yml file in order to have a local PostgreSQL data
 ## Backend error handling
 I created a generic middleware to handle errors in the backend. As the project continues I may add some domain 
 exceptions or specific error handling. I'm aware that the error handling is not perfect yet, but it is a good start.
+
+## Image url
+I've decided to just store the image url since the complexity added from storing the image is not worth
+it for the current requirements.
+
+In the future, as the business grows, it might be a good idea to store the images in a cloud storage service, like S3.
