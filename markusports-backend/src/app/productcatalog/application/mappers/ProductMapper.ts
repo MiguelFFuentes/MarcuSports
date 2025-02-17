@@ -1,5 +1,6 @@
 import {Product} from "../../domain/entities/Product";
 import {ProductDto} from "../dtos/ProductDto";
+import {ProductPartMapper} from "./ProductPartMapper";
 
 export class ProductMapper {
     static toDto(product: Product): ProductDto {
@@ -8,7 +9,8 @@ export class ProductMapper {
             name: product.name,
             description: product.description,
             price: product.price,
-            image: product.image
+            image: product.image,
+            parts: ProductPartMapper.toDtos(product.parts)
         };
     }
 
