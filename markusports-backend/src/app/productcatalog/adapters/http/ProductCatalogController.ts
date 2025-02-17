@@ -15,4 +15,15 @@ export class ProductCatalogController {
             next(error)
         }
     }
+
+    async getProduct(req: Request, res: Response<ProductDto>, next: NextFunction) {
+        try {
+            const productId = req.params.id
+            const product = await this.productCatalogService.getProduct(productId)
+            res.json(product)
+        } catch (error) {
+            console.error('Error in GET /products/:id:', error)
+            next(error)
+        }
+    }
 }

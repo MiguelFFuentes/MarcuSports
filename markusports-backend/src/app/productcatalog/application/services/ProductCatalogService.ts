@@ -10,4 +10,8 @@ export class ProductCatalogService {
         const products = await this.productCatalogRepository.findAll()
         return ProductMapper.toDtos(products)
     }
+
+    async getProduct(productId: string): Promise<ProductDto> {
+        throw new Error('Method not implemented')
+    }
 }

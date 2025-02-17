@@ -11,5 +11,6 @@ const productCatalogController: ProductCatalogController = new ProductCatalogCon
 
 
 productCatalogRouter.get('/', productCatalogController.getProducts.bind(productCatalogController))
+productCatalogRouter.get('/:id', productCatalogController.getProduct.bind(productCatalogController))
 
 export default productCatalogRouter
