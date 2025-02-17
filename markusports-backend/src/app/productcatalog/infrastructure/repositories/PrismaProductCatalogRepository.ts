@@ -5,10 +5,16 @@ import {getPrismaClient} from "../../../core/PrismaService";
 
 export class PrismaProductCatalogRepository implements ProductCatalogRepository {
 
-    constructor(private prisma: PrismaClient = getPrismaClient()) {}
+    constructor(private prisma: PrismaClient = getPrismaClient()) {
+    }
+
     async findAll(): Promise<Product[]> {
         const products = await this.prisma.product.findMany()
         return products.map(fromPrismaProductToDomain)
+    }
+
+    async findById(productId: number): Promise<Product | null> {
+        throw new Error('Method not implemented.')
     }
 }
 

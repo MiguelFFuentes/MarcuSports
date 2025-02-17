@@ -18,7 +18,7 @@ export class ProductCatalogController {
 
     async getProduct(req: Request, res: Response<ProductDto>, next: NextFunction) {
         try {
-            const productId = req.params.id
+            const productId = parseInt(req.params.id)
             const product = await this.productCatalogService.getProduct(productId)
             res.json(product)
         } catch (error) {
