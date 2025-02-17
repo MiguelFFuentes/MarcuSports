@@ -62,3 +62,14 @@ I've decided to just store the image url since the complexity added from storing
 it for the current requirements.
 
 In the future, as the business grows, it might be a good idea to store the images in a cloud storage service, like S3.
+
+## Vuetify challenge
+Vitest and Vuetify usually play well together, however, a big challenge on this project was with the spinner component.
+There is a known bug in the Vuetify library that makes the spinner not being declared correctly in the tests, even 
+though it works perfectly in the browser.
+
+I did a workaround and rely more on skeletons rather than spinners for most actions.
+
+## Vitest debugging with Webstorm challenge
+In one of the recent versions, the --threads flag was changed and is no longer a param. Webstorm has not updated this
+and the default configuration caused an error trying to debug the tests.
