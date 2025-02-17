@@ -6,7 +6,8 @@ export class ProductPartOptionMapper {
         return {
             id: option.id,
             name: option.name,
-            stock: option.stock
+            stock: option.stock,
+            incompatibleOptions: option.incompatibleOptions.map(option => option.id)
         }
     }
 

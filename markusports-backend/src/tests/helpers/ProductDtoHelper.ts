@@ -15,12 +15,14 @@ export function getMockProductDtos(): ProductDto[] {
                         {
                             id: 1,
                             name: "Option 1",
-                            stock: 10
+                            stock: 10,
+                            incompatibleOptions: [2, 3]
                         },
                         {
                             id: 2,
                             name: "Option 2",
-                            stock: 5
+                            stock: 5,
+                            incompatibleOptions: [1]
                         }
                     ]
                 }

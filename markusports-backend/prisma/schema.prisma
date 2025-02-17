@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Product {
-  id          Int     @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   name        String
   description String
   price       Float
@@ -17,17 +17,19 @@ model Product {
 }
 
 model ProductPart {
-  id        Int     @id @default(autoincrement())
-  name      String
-  products  Product[]
-  options   ProductPartOption[]
+  id       Int                 @id @default(autoincrement())
+  name     String
+  products Product[]
+  options  ProductPartOption[]
 }
 
 model ProductPartOption {
-  id           Int     @id @default(autoincrement())
-  name         String
-  stock        Int
-  part        ProductPart @relation(fields: [partId], references: [id])
-  partId      Int
+  id                           Int                 @id @default(autoincrement())
+  name                         String
+  stock                        Int
+  part                         ProductPart         @relation(fields: [partId], references: [id])
+  partId                       Int
+  incompatibleOptions          ProductPartOption[] @relation("IncompatibleOptions")
+  // This is the way Prisma handles symmetric many-to-many self relations, we don't care about this field
+  symmetricIncompatibleOptions ProductPartOption[] @relation("IncompatibleOptions")
 }
-
