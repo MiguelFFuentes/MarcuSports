@@ -12,7 +12,8 @@ describe('PrismaProductCatalogRepository', () => {
     beforeEach(() => {
         prismaClient = {
             product: {
-                findMany: jest.fn().mockResolvedValue(getMockPrismaProducts())
+                findMany: jest.fn().mockResolvedValue(getMockPrismaProducts()),
+                findUnique: jest.fn().mockResolvedValue(getMockPrismaProducts()[0])
             }
         } as unknown as PrismaClient
         prismaProductCatalogRepository = new PrismaProductCatalogRepository(prismaClient as PrismaClient)
@@ -25,13 +26,39 @@ describe('PrismaProductCatalogRepository', () => {
             const products = await prismaProductCatalogRepository.findAll()
 
             expect(products).toEqual(expectedProducts)
-        });
+        })
 
         it('should call the prisma client to get all products', async () => {
             await prismaProductCatalogRepository.findAll()
 
             expect(prismaClient.product.findMany).toHaveBeenCalled()
         })
-    });
+    })
+
+    describe('findById', () => {
+        it('should return a product by id', async () => {
+            const expectedProduct = getMockProducts()[0]
+
+            const product = await prismaProductCatalogRepository.findById(1)
+
+            expect(product).toEqual(expectedProduct)
+        })
+
+        it('should return null if product is not found', async () => {
+            prismaClient.product.findUnique = jest.fn().mockResolvedValue(null)
+
+            const product = await prismaProductCatalogRepository.findById(999)
+
+            expect(product).toBeNull()
+        })
+
+        it('should call the prisma client to get a product by id', async () => {
+            await prismaProductCatalogRepository.findById(1)
+
+            expect(prismaClient.product.findUnique).toHaveBeenCalledWith({
+                where: {id: 1}
+            })
+        })
+    })
 
 })

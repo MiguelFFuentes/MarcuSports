@@ -14,7 +14,11 @@ export class PrismaProductCatalogRepository implements ProductCatalogRepository 
     }
 
     async findById(productId: number): Promise<Product | null> {
-        throw new Error('Method not implemented.')
+        const product = await this.prisma.product.findUnique({
+            where: {id: productId}
+        })
+        if (!product) return null
+        return fromPrismaProductToDomain(product)
     }
 }
 
