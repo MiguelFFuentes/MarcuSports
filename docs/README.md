@@ -107,3 +107,10 @@ For this alpha version, price is only on the Product entity. That means that the
 bicycles don't affect the final price. This can be changed in the future by adding a new column to `ProductPartOption`
 and a computed property on the Product entity.
 
+## Prisma nested types issues
+
+Although Prisma exports the types for the models, it doesn't export the nested types by default. In order to create
+them, a type needs to be created manually based on Prisma.ProductGetPayload and passing down the query as an argument.
+
+However, this is not working as expected. Types still give some issues so there I've decided to move forward for now and
+use `any` type for mapping the nested ORM entity as `ProductParts`.

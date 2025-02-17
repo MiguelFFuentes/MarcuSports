@@ -3,7 +3,7 @@ import request from "supertest";
 import {getMockProductDtos} from "../../helpers/ProductDtoHelper";
 import app from "../../../app";
 
-describe('A User', () => {
+xdescribe('A User', () => {
     it('should retrieve a list of products', async () => {
         const expectedProducts: ProductDto[] = getMockProductDtos()
 

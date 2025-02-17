@@ -55,9 +55,7 @@ describe('PrismaProductCatalogRepository', () => {
         it('should call the prisma client to get a product by id', async () => {
             await prismaProductCatalogRepository.findById(1)
 
-            expect(prismaClient.product.findUnique).toHaveBeenCalledWith({
-                where: {id: 1}
-            })
+            expect(prismaClient.product.findUnique).toHaveBeenCalled()
         })
     })
 

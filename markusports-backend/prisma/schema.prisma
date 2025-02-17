@@ -13,4 +13,21 @@ model Product {
   description String
   price       Float
   image       String?
+  parts       ProductPart[]
 }
+
+model ProductPart {
+  id        Int     @id @default(autoincrement())
+  name      String
+  products  Product[]
+  options   ProductPartOption[]
+}
+
+model ProductPartOption {
+  id           Int     @id @default(autoincrement())
+  name         String
+  stock        Int
+  part        ProductPart @relation(fields: [partId], references: [id])
+  partId      Int
+}
+
