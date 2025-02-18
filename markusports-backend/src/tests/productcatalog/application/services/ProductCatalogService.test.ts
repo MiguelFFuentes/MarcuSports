@@ -1,6 +1,6 @@
 import {ProductCatalogService} from "@productcatalog/application/services/ProductCatalogService";
 import {ProductNotFoundError} from "@productcatalog/domain/exceptions/ProductNotFoundError";
-import {getMockProductDtos} from "@helpers/ProductDtoHelper";
+import {getMockProductDtos} from "@helpers/productcatalog/ProductDtoHelper";
 import {productCatalogRepository} from "../../../stubs/ProductCatalogRepositoryStub";
 
 describe('ProductCatalogService', () => {

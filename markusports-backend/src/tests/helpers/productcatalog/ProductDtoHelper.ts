@@ -1,4 +1,4 @@
-import {ProductDto} from "@productcatalog/application/dtos/ProductDto";
+import {ProductDto} from "../../../app/productcatalog/application/dtos/ProductDto";
 
 export function getMockProductDtos(): ProductDto[] {
     return [

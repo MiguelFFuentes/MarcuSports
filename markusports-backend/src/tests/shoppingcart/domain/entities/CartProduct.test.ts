@@ -1,20 +1,15 @@
 import {CartProduct} from "@shoppingcart/domain/entities/CartProduct";
 import {MissingProductOptionsError} from "@shoppingcart/domain/exceptions/MissingProductOptionsError";
-import {CartPartId} from "@shoppingcart/domain/valueobjects/CartPartId";
-import {getMockOptions} from "@helpers/shoppingcart/CartOptionHelper";
 import {OutOfStockError} from "@shoppingcart/domain/exceptions/OutOfStockError";
 import {IncompatibleOptionsError} from "@shoppingcart/domain/exceptions/IncompatibleOptionsError";
+import {getMockProduct} from "@helpers/shoppingcart/CartProductHelper";
 
 describe('CartProduct', () => {
 
     let cartProduct: CartProduct
 
     beforeEach(() => {
-        const partIds: CartPartId[] = [
-            {id: 1},
-            {id: 2},
-        ]
-        cartProduct = new CartProduct(1, 'Test product', 'This is a test product', getMockOptions(), partIds)
+        cartProduct = getMockProduct()
     })
     it('should raise an error if every part is not selected', () => {
         cartProduct.selectOptions([1])

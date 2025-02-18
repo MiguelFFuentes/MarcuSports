@@ -1,6 +1,6 @@
 import {ProductDto} from "@productcatalog/application/dtos/ProductDto";
 import request from "supertest";
-import {getMockProductDtos} from "../../helpers/ProductDtoHelper";
+import {getMockProductDtos} from "@helpers/productcatalog/ProductDtoHelper";
 import app from "../../../app";
 
 xdescribe('A User', () => {

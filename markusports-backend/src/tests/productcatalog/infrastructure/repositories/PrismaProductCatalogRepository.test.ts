@@ -2,8 +2,8 @@ import {
     PrismaProductCatalogRepository
 } from "@productcatalog/infrastructure/repositories/PrismaProductCatalogRepository";
 import {PrismaClient} from "@prisma/client";
-import {getMockPrismaProducts} from "@helpers/PrismaProductHelper";
-import {getMockProducts} from "@helpers/ProductHelper";
+import {getMockPrismaProducts} from "@helpers/productcatalog/PrismaProductHelper";
+import {getMockProducts} from "@helpers/productcatalog/ProductHelper";
 
 describe('PrismaProductCatalogRepository', () => {
     let prismaProductCatalogRepository: PrismaProductCatalogRepository;

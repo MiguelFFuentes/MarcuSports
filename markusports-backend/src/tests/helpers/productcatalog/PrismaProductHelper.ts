@@ -1,9 +1,8 @@
-import {Product} from "@productcatalog/domain/entities/Product";
-import {ProductPartOption} from "@productcatalog/domain/entities/ProductPartOption";
+import {ProductPartOption} from "../../../app/productcatalog/domain/entities/ProductPartOption";
 
-export function getMockProducts(): Product[] {
+export function getMockPrismaProducts() {
 
-    const [option1, option2] = getMockProductPartOptions()
+    const [option1, option2] = getMockPrismaProductPartOptions()
     return [
         {
             id: 1,
@@ -28,7 +27,7 @@ export function getMockProducts(): Product[] {
     ]
 }
 
-function getMockProductPartOptions(): ProductPartOption[] {
+function getMockPrismaProductPartOptions() {
     return [
         {
             id: 1,
@@ -39,26 +38,28 @@ function getMockProductPartOptions(): ProductPartOption[] {
                     id: 2,
                     name: "Option 2",
                     stock: 5,
-                    incompatibleOptions: []
+                    incompatibleOptions: [],
+
                 },
                 {
                     id: 3,
                     name: "Option 3",
                     stock: 8,
-                    incompatibleOptions: []
-                }
-            ]
+                    incompatibleOptions: [],
+                }],
+            symmetricIncompatibleOptions: []
         },
         {
             id: 2,
             name: "Option 2",
             stock: 5,
-            incompatibleOptions: [
+            incompatibleOptions: [],
+            symmetricIncompatibleOptions: [
                 {
                     id: 1,
                     name: "Option 1",
                     stock: 10,
-                    incompatibleOptions: []
+                    incompatibleOptions: [],
                 }
             ]
         },
@@ -66,12 +67,14 @@ function getMockProductPartOptions(): ProductPartOption[] {
             id: 3,
             name: "Option 3",
             stock: 8,
-            incompatibleOptions: [
+            incompatibleOptions: [],
+            symmetricIncompatibleOptions: [
                 {
                     id: 1,
                     name: "Option 1",
                     stock: 10,
-                    incompatibleOptions: []
+                    incompatibleOptions: [],
+
                 }
             ]
         },
@@ -79,7 +82,8 @@ function getMockProductPartOptions(): ProductPartOption[] {
             id: 4,
             name: "Option 4",
             stock: 0,
-            incompatibleOptions: []
+            incompatibleOptions: [],
+            symmetricIncompatibleOptions: []
         }
     ]
 }

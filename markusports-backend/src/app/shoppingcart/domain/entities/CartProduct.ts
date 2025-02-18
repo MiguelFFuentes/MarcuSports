@@ -13,9 +13,11 @@ export class CartProduct {
         public name: string,
         public description: string,
         public options: CartOption[],
+        selectedOptions: CartOption[],
         public parts: CartPartId[],
         public image?: string
     ) {
+        this.selectedOptions = selectedOptions
     }
 
     selectOptions(optionIds: number[]) {
@@ -23,6 +25,7 @@ export class CartProduct {
             ...this.selectedOptions,
             ...this.options.filter(option => optionIds.includes(option.id))
         ]
+        this.validate()
     }
 
     validate() {

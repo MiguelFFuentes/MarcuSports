@@ -1,6 +1,5 @@
 import {ProductCatalogRepository} from "@productcatalog/domain/repositories/ProductCatalogRepository";
-import {getMockProductDtos} from "../helpers/ProductDtoHelper";
-import {getMockProducts} from "../helpers/ProductHelper";
+import {getMockProducts} from "../helpers/productcatalog/ProductHelper";
 
 export const productCatalogRepository: ProductCatalogRepository = {
     findAll: jest.fn().mockResolvedValue(getMockProducts()),

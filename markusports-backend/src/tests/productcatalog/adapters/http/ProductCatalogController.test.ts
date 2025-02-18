@@ -2,7 +2,7 @@ import {Request, Response} from "express"
 import {ProductDto} from "@productcatalog/application/dtos/ProductDto";
 import {ProductCatalogController} from "@productcatalog/adapters/http/ProductCatalogController";
 import {ProductCatalogService} from "@productcatalog/application/services/ProductCatalogService";
-import {getMockProductDtos} from "@helpers/ProductDtoHelper";
+import {getMockProductDtos} from "@helpers/productcatalog/ProductDtoHelper";
 import SpyInstance = jest.SpyInstance;
 import {productCatalogRepository} from "../../../stubs/ProductCatalogRepositoryStub";
 
