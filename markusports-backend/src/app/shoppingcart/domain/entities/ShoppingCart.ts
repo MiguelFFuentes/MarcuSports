@@ -1,15 +1,24 @@
-import {ShoppingCartStatus} from "./ShoppingCartStatus";
+import {ShoppingCartStatus} from "../valueobjects/ShoppingCartStatus";
+import {CartProduct} from "./CartProduct";
 
 export class ShoppingCart {
 
     constructor(
         public id: number,
         public shoppingCartStatus: ShoppingCartStatus,
-        public products: any
-    ) { }
+        private products: CartProduct[]
+    ) {
+        // We do this in the constructor so every ShoppingCart instance is valid
+        this.products.forEach(product => product.validate())
+    }
 
-    addProduct(product: any) {
-        throw new Error('Method not implemented.');
+    addProduct(product: CartProduct, selectedOptions: number[]) {
+        product.selectOptions(selectedOptions)
+        this.products.push(product)
+    }
+
+    getProducts() {
+        return this.products
     }
 
 }
