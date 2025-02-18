@@ -50,7 +50,8 @@ describe('ProductCatalogController', () => {
 
         it('should call the error handler when an error raises', async () => {
             const error = new Error('Error retrieving products')
-            const consoleMock = jest.spyOn(console, 'error').mockImplementation()
+            const consoleMock = jest.spyOn(console, 'error')
+                .mockImplementation()
             getProductsMock.mockRejectedValue(error)
 
             await productCatalogController.getProducts(requestMock, responseMock, nextMock)

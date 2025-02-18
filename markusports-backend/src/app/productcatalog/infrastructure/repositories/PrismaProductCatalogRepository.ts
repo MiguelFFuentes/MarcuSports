@@ -1,6 +1,7 @@
 import {ProductCatalogRepository} from "../../domain/repositories/ProductCatalogRepository";
 import {Product} from "../../domain/entities/Product";
 import {
+    Prisma,
     PrismaClient,
 } from "@prisma/client";
 import {getPrismaClient} from "../../../core/PrismaService";
@@ -8,7 +9,7 @@ import {PrismaProductMapper} from "./PrismaProductMapper";
 
 export class PrismaProductCatalogRepository implements ProductCatalogRepository {
 
-    private productQuery ={
+    private productQuery: Prisma.ProductSelect ={
         parts: {
             include: {
                 options: {
