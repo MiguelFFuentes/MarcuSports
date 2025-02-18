@@ -90,6 +90,8 @@ I've decided to use an approach where a `ProductPartOption` has a list of incomp
 item is selected in the cart with some of the incompatible items, there will be an error message and this action will
 fail.
 
+This approach has been coded in the `ShoppingCart` domain entity.
+
 "If you select "fat bike wheels", then the red rim color is unavailable because the manufacturer doesn't provide it."
 
 This last requirement is fulfilled with this approach easily. However, there is another requirement stated as an
