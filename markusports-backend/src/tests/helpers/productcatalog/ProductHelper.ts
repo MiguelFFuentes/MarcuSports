@@ -28,7 +28,7 @@ export function getMockProducts(): Product[] {
     ]
 }
 
-function getMockProductPartOptions(): ProductPartOption[] {
+function getMockProductPartOptions() {
     return [
         {
             id: 1,
@@ -39,13 +39,15 @@ function getMockProductPartOptions(): ProductPartOption[] {
                     id: 2,
                     name: "Green color",
                     stock: 5,
-                    incompatibleOptions: []
+                    incompatibleOptions: [],
+                    partId: 1
                 },
                 {
                     id: 3,
                     name: "Big size",
                     stock: 8,
-                    incompatibleOptions: []
+                    incompatibleOptions: [],
+                    partId: 2
                 }
             ]
         },
@@ -58,7 +60,8 @@ function getMockProductPartOptions(): ProductPartOption[] {
                     id: 1,
                     name: "Red color",
                     stock: 10,
-                    incompatibleOptions: []
+                    incompatibleOptions: [],
+                    partId: 1
                 }
             ]
         },
@@ -71,7 +74,8 @@ function getMockProductPartOptions(): ProductPartOption[] {
                     id: 1,
                     name: "Red color",
                     stock: 10,
-                    incompatibleOptions: []
+                    incompatibleOptions: [],
+                    partId: 1
                 }
             ]
         },
