@@ -1,26 +1,26 @@
-import {ProductDto} from "../../../app/productcatalog/application/dtos/ProductDto";
+import {ProductDto} from "@productcatalog/application/dtos/ProductDto";
 
 export function getMockProductDtos(): ProductDto[] {
     return [
         {
             id: 1,
-            name: "Test product",
+            name: "Super bike",
             price: 29.99,
             description: "This is a product for testing",
             parts: [
                 {
                     id: 1,
-                    name: "Test part",
+                    name: "Color",
                     options: [
                         {
                             id: 1,
-                            name: "Option 1",
+                            name: "Red color",
                             stock: 10,
                             incompatibleOptions: [2, 3]
                         },
                         {
                             id: 2,
-                            name: "Option 2",
+                            name: "Green color",
                             stock: 5,
                             incompatibleOptions: [1]
                         }
@@ -30,7 +30,7 @@ export function getMockProductDtos(): ProductDto[] {
         },
         {
             id: 2,
-            name: "Another Test product",
+            name: "Mega bike",
             price: 19.99,
             description: "This is a product for testing",
             parts: []

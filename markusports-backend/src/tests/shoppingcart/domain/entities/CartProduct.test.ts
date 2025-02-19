@@ -2,14 +2,14 @@ import {CartProduct} from "@shoppingcart/domain/entities/CartProduct";
 import {MissingProductOptionsError} from "@shoppingcart/domain/exceptions/MissingProductOptionsError";
 import {OutOfStockError} from "@shoppingcart/domain/exceptions/OutOfStockError";
 import {IncompatibleOptionsError} from "@shoppingcart/domain/exceptions/IncompatibleOptionsError";
-import {getMockCartProduct, getMockEmptyCartProduct} from "@helpers/shoppingcart/CartProductHelper";
+import {getMockNoSelectionCartProduct} from "@helpers/shoppingcart/CartProductHelper";
 
 describe('CartProduct', () => {
 
     let cartProduct: CartProduct
 
     beforeEach(() => {
-        cartProduct = getMockEmptyCartProduct()
+        cartProduct = getMockNoSelectionCartProduct()
     })
     it('should raise an error if every part is not selected', () => {
         cartProduct.selectOptions([1])

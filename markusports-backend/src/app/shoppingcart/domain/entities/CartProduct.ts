@@ -12,6 +12,7 @@ export class CartProduct {
         public id: number,
         public name: string,
         public description: string,
+        public price: number,
         public options: CartOption[],
         selectedOptions: CartOption[],
         public parts: CartPartId[],
@@ -31,6 +32,11 @@ export class CartProduct {
         this.validateAllPartsSelected()
         this.validateStock()
         this.validateIncompatibleOptions()
+    }
+
+    getSelectedOptions(): CartOption[] {
+        // Returns a copy of the selected options to prevent mutation
+        return [...this.selectedOptions]
     }
 
     private validateAllPartsSelected() {

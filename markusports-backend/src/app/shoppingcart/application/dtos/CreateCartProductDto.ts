@@ -1,4 +1,4 @@
-export interface CreateShoppingCartProductDto {
+export interface CreateCartProductDto {
     id: number
     selectedOptionsIds: number[]
 }

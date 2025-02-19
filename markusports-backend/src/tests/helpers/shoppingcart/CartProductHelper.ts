@@ -7,42 +7,53 @@ const partIds: CartPartId[] = [
     {id: 2},
 ]
 
-export function getMockEmptyCartProduct() {
-    return new CartProduct(
-        1,
-        'Test product',
-        'This is a test product',
-        getMockOptions(),
-        [],
-        partIds
-    )
+export function getMockNoSelectionCartProduct() {
+    return getMockNoSelectionCartProducts()[0]
 }
 
 export function getMockCartProduct() {
-    return new CartProduct(
-        1,
-        'Test product',
-        'This is a test product',
-        getMockOptions(),
-        getMockSelectedOptions(),
-        partIds
-    )
+    return getMockCartProducts()[0]
+}
+
+export function getMockNoSelectionCartProducts() {
+    return [
+        new CartProduct(
+            1,
+            'Super bike',
+            'This is a test product',
+            19.99,
+            getMockOptions(),
+            [],
+            partIds
+        ),
+        new CartProduct(
+            2,
+            'Mega bike',
+            'This is another test product',
+            19.99,
+            getMockOptions(),
+            [],
+            partIds
+        )
+    ]
 }
 
 export function getMockCartProducts() {
     return [
         new CartProduct(
             1,
-            'Test product',
+            'Super bike',
             'This is a test product',
+            19.99,
             getMockOptions(),
             getMockSelectedOptions(),
             partIds
         ),
         new CartProduct(
             2,
-            'Another Test product',
+            'Mega bike',
             'This is another test product',
+            19.99,
             getMockOptions(),
             getMockSelectedOptions(),
             partIds

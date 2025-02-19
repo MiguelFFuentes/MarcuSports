@@ -1,5 +1,5 @@
-import {CreateShoppingCartProductDto} from "./CreateShoppingCartProductDto";
+import {CreateCartProductDto} from "./CreateCartProductDto";
 
 export interface CreateShoppingCartDto {
-    products: CreateShoppingCartProductDto[]
+    products: CreateCartProductDto[]
 }

@@ -4,7 +4,7 @@ import {ShoppingCartService} from "@shoppingcart/application/services/ShoppingCa
 import {shoppingCartRepositoryStub} from "../../../stubs/ShoppingCartRepositoryStub";
 import {shoppingCartProductRepositoryStub} from "../../../stubs/ShoppingCartProductRepositoryStub";
 import {CreateShoppingCartDto} from "@shoppingcart/application/dtos/CreateShoppingCartDto";
-import {GetShoppingCart} from "@shoppingcart/application/dtos/GetShoppingCart";
+import {GetShoppingCartDto} from "@shoppingcart/application/dtos/GetShoppingCartDto";
 
 describe('ShoppingCartController', () => {
 
@@ -28,7 +28,7 @@ describe('ShoppingCartController', () => {
             shoppingCartRepositoryStub,
             shoppingCartProductRepositoryStub
         )
-        const mockCart: GetShoppingCart = {id: 1, products: []}
+        const mockCart: GetShoppingCartDto = {id: 1, products: []}
         createShoppingCartMock = jest.spyOn(shoppingCartService, 'createShoppingCart')
             .mockImplementation((payload: CreateShoppingCartDto) => Promise.resolve(mockCart))
         shoppingCartController = new ShoppingCartController(shoppingCartService)
