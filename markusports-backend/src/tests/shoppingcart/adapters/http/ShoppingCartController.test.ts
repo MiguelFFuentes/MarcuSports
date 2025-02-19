@@ -6,22 +6,22 @@ import {shoppingCartProductRepositoryStub} from "../../../stubs/ShoppingCartProd
 import {CreateShoppingCartDto} from "@shoppingcart/application/dtos/CreateShoppingCartDto";
 import {GetShoppingCartDto} from "@shoppingcart/application/dtos/GetShoppingCartDto";
 import {MissingProductOptionsError} from "@shoppingcart/domain/exceptions/MissingProductOptionsError";
+import {ShoppingCartNotFoundError} from "@shoppingcart/domain/exceptions/ShoppingCartNotFoundError";
 
 describe('ShoppingCartController', () => {
 
     let shoppingCartController: ShoppingCartController
 
     let createShoppingCartMock: jest.SpyInstance
-    const requestMock = {
-        body: {
-            products: []
-        }
-    } as Request<CreateShoppingCartDto>
+    let getShoppingCartMock: jest.SpyInstance
+    let requestMock: any
     const responseMock = {
         json: jest.fn(),
         status: jest.fn().mockReturnThis()
     } as unknown as Response
     const nextMock = jest.fn()
+
+    const mockCart: GetShoppingCartDto = {id: 1, products: []}
 
     beforeEach(() => {
 
@@ -29,9 +29,10 @@ describe('ShoppingCartController', () => {
             shoppingCartRepositoryStub,
             shoppingCartProductRepositoryStub
         )
-        const mockCart: GetShoppingCartDto = {id: 1, products: []}
         createShoppingCartMock = jest.spyOn(shoppingCartService, 'createShoppingCart')
             .mockImplementation((payload: CreateShoppingCartDto) => Promise.resolve(mockCart))
+        getShoppingCartMock = jest.spyOn(shoppingCartService, 'getShoppingCart')
+            .mockImplementation((id: number) => Promise.resolve(mockCart))
         shoppingCartController = new ShoppingCartController(shoppingCartService)
     })
 
@@ -44,6 +45,14 @@ describe('ShoppingCartController', () => {
     })
 
     describe('createShoppingCart', () => {
+        beforeEach(() => {
+            requestMock = {
+                body: {
+                    products: []
+                }
+            } as Request<CreateShoppingCartDto>
+        })
+
         it('should return 201 status when a shopping cart is created', async () => {
             await shoppingCartController.createShoppingCart(requestMock, responseMock, nextMock)
             expect(responseMock.status).toHaveBeenCalledWith(201)
@@ -63,7 +72,7 @@ describe('ShoppingCartController', () => {
             await shoppingCartController.createShoppingCart(requestMock, responseMock, nextMock)
 
             expect(nextMock).toHaveBeenCalled()
-            expect(consoleMock).toHaveBeenCalledWith('Error in POST /shoppingcart:', error)
+            expect(consoleMock).toHaveBeenCalledWith('Error in POST /shoppingcarts:', error)
         })
 
         it('should return a 400 status when the error is from the domain', async () => {
@@ -75,6 +84,50 @@ describe('ShoppingCartController', () => {
             await shoppingCartController.createShoppingCart(requestMock, responseMock, nextMock)
 
             expect(responseMock.status).toHaveBeenCalledWith(400)
+            expect(responseMock.json).toHaveBeenCalledWith({error: error.message})
+        })
+    })
+
+    describe('getShoppingCart', () => {
+        beforeEach(() => {
+            requestMock = {
+                params: {
+                    id: 1
+                }
+            } as unknown as Request
+        })
+
+        it('should return the shopping cart', async () => {
+            await shoppingCartController.getShoppingCart(requestMock, responseMock, nextMock)
+            expect(responseMock.json).toHaveBeenCalledWith(mockCart)
+        })
+
+        it('should call the shopping cart service', async () => {
+            await shoppingCartController.getShoppingCart(requestMock, responseMock, nextMock)
+            expect(getShoppingCartMock).toHaveBeenCalled()
+        })
+
+        it('should call the error handler when an error raises', async () => {
+            const error = new Error('Error creating shopping cart')
+            const consoleMock = jest.spyOn(console, 'error')
+                .mockImplementation()
+            getShoppingCartMock.mockRejectedValue(error)
+
+            await shoppingCartController.getShoppingCart(requestMock, responseMock, nextMock)
+
+            expect(nextMock).toHaveBeenCalled()
+            expect(consoleMock).toHaveBeenCalledWith('Error in GET /shoppingcarts/:id:', error)
+        })
+
+        it('should return a 400 status when the error is from the domain', async () => {
+            const error = new ShoppingCartNotFoundError(1)
+            const consoleMock = jest.spyOn(console, 'error')
+                .mockImplementation()
+            getShoppingCartMock.mockRejectedValue(error)
+
+            await shoppingCartController.getShoppingCart(requestMock, responseMock, nextMock)
+
+            expect(responseMock.status).toHaveBeenCalledWith(404)
             expect(responseMock.json).toHaveBeenCalledWith({error: error.message})
         })
     })

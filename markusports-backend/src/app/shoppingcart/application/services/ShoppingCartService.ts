@@ -25,4 +25,8 @@ export class ShoppingCartService {
         await this.shoppingCartRepository.save(shoppingCart)
         return ShoppingCartMapper.toDto(shoppingCart)
     }
+
+    async getShoppingCart(id: number): Promise<GetShoppingCartDto> {
+        throw new Error('Not implemented')
+    }
 }

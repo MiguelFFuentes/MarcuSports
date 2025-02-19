@@ -5,6 +5,7 @@ import {MissingProductOptionsError} from "../domain/exceptions/MissingProductOpt
 import {OutOfStockError} from "../domain/exceptions/OutOfStockError";
 import {IncompatibleOptionsError} from "../domain/exceptions/IncompatibleOptionsError";
 import {DuplicatedPartError} from "../domain/exceptions/DuplicatedPartError";
+import {ShoppingCartNotFoundError} from "../domain/exceptions/ShoppingCartNotFoundError";
 
 export class ShoppingCartController {
     constructor(private shoppingCartService: ShoppingCartService) {
@@ -19,12 +20,27 @@ export class ShoppingCartController {
                 error instanceof MissingProductOptionsError ||
                 error instanceof OutOfStockError ||
                 error instanceof IncompatibleOptionsError ||
-                error instanceof  DuplicatedPartError
+                error instanceof DuplicatedPartError
             ) {
                 res.status(400).json({error: error.message})
                 return
             }
-            console.error('Error in POST /shoppingcart:', error)
+            console.error('Error in POST /shoppingcarts:', error)
+            next(error)
+        }
+    }
+
+    async getShoppingCart(req: Request, res: Response, next: NextFunction) {
+        try {
+            const shoppingCartId = parseInt(req.params.id)
+            const shoppingCart = await this.shoppingCartService.getShoppingCart(shoppingCartId)
+            res.json(shoppingCart)
+        } catch (error) {
+            if (error instanceof ShoppingCartNotFoundError) {
+                res.status(404).json({error: error.message})
+                return
+            }
+            console.error('Error in GET /shoppingcarts/:id:', error)
             next(error)
         }
     }

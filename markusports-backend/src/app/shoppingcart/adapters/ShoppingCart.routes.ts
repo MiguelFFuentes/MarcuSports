@@ -14,4 +14,5 @@ const shoppingCartService: ShoppingCartService = new ShoppingCartService(shoppin
 const shoppingCartController: ShoppingCartController = new ShoppingCartController(shoppingCartService)
 
 shoppingCartRouter.post('/', shoppingCartController.createShoppingCart.bind(shoppingCartController))
+shoppingCartRouter.get('/:id', shoppingCartController.getShoppingCart.bind(shoppingCartController))
 export default shoppingCartRouter
