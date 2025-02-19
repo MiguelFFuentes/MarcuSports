@@ -4,7 +4,7 @@ import {
     Prisma,
     PrismaClient,
 } from "@prisma/client";
-import {getPrismaClient} from "@core/PrismaService";
+import {getPrismaClient} from "../../../core/PrismaService";
 import {PrismaProductMapper} from "../mappers/PrismaProductMapper";
 
 export class PrismaProductCatalogRepository implements ProductCatalogRepository {

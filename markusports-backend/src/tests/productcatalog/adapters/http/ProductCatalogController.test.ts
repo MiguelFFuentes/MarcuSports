@@ -3,8 +3,9 @@ import {ProductDto} from "@productcatalog/application/dtos/ProductDto";
 import {ProductCatalogController} from "@productcatalog/adapters/http/ProductCatalogController";
 import {ProductCatalogService} from "@productcatalog/application/services/ProductCatalogService";
 import {getMockProductDtos} from "@helpers/productcatalog/ProductDtoHelper";
-import SpyInstance = jest.SpyInstance;
 import {productCatalogRepository} from "../../../stubs/ProductCatalogRepositoryStub";
+import {ProductNotFoundError} from "@productcatalog/domain/exceptions/ProductNotFoundError";
+import SpyInstance = jest.SpyInstance;
 
 describe('ProductCatalogController', () => {
 
@@ -15,7 +16,7 @@ describe('ProductCatalogController', () => {
     let getProductsMock: SpyInstance<Promise<ProductDto[]>>
     let getProductMock: SpyInstance<Promise<ProductDto>>
     const requestMock = {} as Request
-    const responseMock = {json: jest.fn()} as unknown as Response
+    const responseMock = {json: jest.fn(), status: jest.fn().mockReturnThis()} as unknown as Response
     const nextMock = jest.fn()
 
     beforeEach(() => {
@@ -87,6 +88,18 @@ describe('ProductCatalogController', () => {
 
             expect(nextMock).toHaveBeenCalled()
             expect(consoleMock).toHaveBeenCalledWith('Error in GET /products/:id:', error)
+        })
+
+        it('should return a 404 status when the error is from the domain', async () => {
+            const error = new ProductNotFoundError(1)
+            const consoleMock = jest.spyOn(console, 'error')
+                .mockImplementation()
+            getProductMock.mockRejectedValue(error)
+
+            await productCatalogController.getProduct(requestMock, responseMock, nextMock)
+
+            expect(responseMock.status).toHaveBeenCalledWith(404)
+            expect(responseMock.json).toHaveBeenCalledWith({error: error.message})
         })
     })
 })
