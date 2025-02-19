@@ -15,7 +15,7 @@ app.use(cors())
 
 // Routers
 app.use('/products', productCatalogRouter)
-app.use('/shoppingcart', shoppingCartRouter)
+app.use('/shoppingcarts', shoppingCartRouter)
 
 app.get("/", (req, res) => {
     res.send("Hello world! This is MarkuSports.")
