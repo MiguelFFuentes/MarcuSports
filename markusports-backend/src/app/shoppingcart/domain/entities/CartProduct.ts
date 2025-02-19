@@ -25,7 +25,6 @@ export class CartProduct {
             ...this.selectedOptions,
             ...this.options.filter(option => optionIds.includes(option.id))
         ]
-        this.validate()
     }
 
     validate() {

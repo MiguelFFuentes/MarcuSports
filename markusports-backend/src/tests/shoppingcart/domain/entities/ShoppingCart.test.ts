@@ -1,6 +1,6 @@
 import {ShoppingCart} from "@shoppingcart/domain/entities/ShoppingCart"
 import {ShoppingCartStatus} from "@shoppingcart/domain/valueobjects/ShoppingCartStatus";
-import {getMockProduct} from "@helpers/shoppingcart/CartProductHelper";
+import {getMockCartProduct} from "@helpers/shoppingcart/CartProductHelper";
 
 describe('ShoppingCart', () => {
 
@@ -8,7 +8,7 @@ describe('ShoppingCart', () => {
 
         const shoppingCart = new ShoppingCart(1, ShoppingCartStatus.OPEN, [])
 
-        const product = getMockProduct()
+        const product = getMockCartProduct()
 
         shoppingCart.addProduct(product, [1, 3])
 

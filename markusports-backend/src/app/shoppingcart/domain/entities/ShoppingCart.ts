@@ -14,6 +14,7 @@ export class ShoppingCart {
 
     addProduct(product: CartProduct, selectedOptions: number[]) {
         product.selectOptions(selectedOptions)
+        product.validate()
         this.products.push(product)
     }
 

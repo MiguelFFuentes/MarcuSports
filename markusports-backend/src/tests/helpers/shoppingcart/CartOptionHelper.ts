@@ -1,6 +1,6 @@
-import {CartOption} from "../../../app/shoppingcart/domain/entities/CartOption";
+import {CartOption} from "@shoppingcart/domain/entities/CartOption";
 
-export function getMockOptions() {
+export function getMockOptions(): CartOption[] {
     return [
         {
             id: 1,
@@ -51,6 +51,33 @@ export function getMockOptions() {
                     incompatibleOptions: []
                 }
             ],
+            partId: 2
+        }
+    ]
+}
+
+export function getMockSelectedOptions(): CartOption[] {
+    return [
+        {
+            id: 1,
+            name: 'Red color',
+            stock: 2,
+            incompatibleOptions: [
+                {
+                    id: 5,
+                    name: 'Medium size',
+                    stock: 0,
+                    partId: 2,
+                    incompatibleOptions: []
+                }
+            ],
+            partId: 1
+        },
+        {
+            id: 3,
+            name: 'Big size',
+            stock: 3,
+            incompatibleOptions: [],
             partId: 2
         }
     ]

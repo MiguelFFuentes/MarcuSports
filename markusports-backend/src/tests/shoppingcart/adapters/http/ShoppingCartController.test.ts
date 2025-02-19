@@ -1,13 +1,21 @@
 import {ShoppingCartController} from "@shoppingcart/adapters/ShoppingCartController";
 import {Request, Response} from "express";
 import {ShoppingCartService} from "@shoppingcart/application/services/ShoppingCartService";
+import {shoppingCartRepositoryStub} from "../../../stubs/ShoppingCartRepositoryStub";
+import {shoppingCartProductRepositoryStub} from "../../../stubs/ShoppingCartProductRepositoryStub";
+import {CreateShoppingCartDto} from "@shoppingcart/application/dtos/CreateShoppingCartDto";
+import {GetShoppingCart} from "@shoppingcart/application/dtos/GetShoppingCart";
 
 describe('ShoppingCartController', () => {
 
     let shoppingCartController: ShoppingCartController
 
     let createShoppingCartMock: jest.SpyInstance
-    const requestMock = {} as Request
+    const requestMock = {
+        body: {
+            products: []
+        }
+    } as Request<CreateShoppingCartDto>
     const responseMock = {
         json: jest.fn(),
         status: jest.fn().mockReturnThis()
@@ -15,8 +23,14 @@ describe('ShoppingCartController', () => {
     const nextMock = jest.fn()
 
     beforeEach(() => {
-        const shoppingCartService = new ShoppingCartService()
-        createShoppingCartMock = jest.spyOn(shoppingCartService, 'createShoppingCart').mockResolvedValue()
+
+        const shoppingCartService = new ShoppingCartService(
+            shoppingCartRepositoryStub,
+            shoppingCartProductRepositoryStub
+        )
+        const mockCart: GetShoppingCart = {id: 1, products: []}
+        createShoppingCartMock = jest.spyOn(shoppingCartService, 'createShoppingCart')
+            .mockImplementation((payload: CreateShoppingCartDto) => Promise.resolve(mockCart))
         shoppingCartController = new ShoppingCartController(shoppingCartService)
     })
 
