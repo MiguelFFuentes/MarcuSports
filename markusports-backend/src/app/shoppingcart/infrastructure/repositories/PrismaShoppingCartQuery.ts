@@ -1,4 +1,6 @@
-export default {
+import {Prisma} from "@prisma/client";
+
+export const PrismaShoppingCartQuery: Prisma.ShoppingCartSelect = {
     products: {
         include: {
             selectedOptions: {

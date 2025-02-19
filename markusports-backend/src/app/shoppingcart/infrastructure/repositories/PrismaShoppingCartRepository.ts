@@ -5,7 +5,7 @@ import {getPrismaClient} from "../../../core/PrismaService";
 import {PrismaShoppingCartMapper} from "../mappers/PrismaShoppingCartMapper";
 import {CartProduct} from "../../domain/entities/CartProduct";
 import {CartOption} from "../../domain/entities/CartOption";
-import PrismaShoppingCartQuery from "./PrismaShoppingCartQuery";
+import {PrismaShoppingCartQuery} from "./PrismaShoppingCartQuery";
 
 export class PrismaShoppingCartRepository implements ShoppingCartRepository {
 
