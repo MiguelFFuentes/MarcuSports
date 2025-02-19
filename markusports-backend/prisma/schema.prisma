@@ -25,29 +25,29 @@ model ProductPart {
 }
 
 model ProductPartOption {
-  id                           Int                         @id @default(autoincrement())
+  id                           Int                   @id @default(autoincrement())
   name                         String
   stock                        Int
-  part                         ProductPart                 @relation(fields: [partId], references: [id])
+  part                         ProductPart           @relation(fields: [partId], references: [id])
   partId                       Int
-  incompatibleOptions          ProductPartOption[]         @relation("IncompatibleOptions")
+  incompatibleOptions          ProductPartOption[]   @relation("IncompatibleOptions")
   // This is the way Prisma handles symmetric many-to-many self relations, we don't care about this field
-  symmetricIncompatibleOptions ProductPartOption[]         @relation("IncompatibleOptions")
+  symmetricIncompatibleOptions ProductPartOption[]   @relation("IncompatibleOptions")
   carts                        ShoppingCartProduct[]
 }
 
 model ShoppingCart {
-  id     Int                   @id @default(autoincrement())
-  status String                @default("open")
-  products  ShoppingCartProduct[]
+  id       Int                   @id @default(autoincrement())
+  status   String                @default("open")
+  products ShoppingCartProduct[]
 }
 
 model ShoppingCartProduct {
-  id              Int                         @id @default(autoincrement())
-  product         Product                     @relation(fields: [productId], references: [id])
+  id              Int                 @id @default(autoincrement())
+  product         Product             @relation(fields: [productId], references: [id])
   productId       Int
-  shoppingCart    ShoppingCart                @relation(fields: [shoppingCartId], references: [id])
+  shoppingCart    ShoppingCart        @relation(fields: [shoppingCartId], references: [id])
   shoppingCartId  Int
   selectedOptions ProductPartOption[]
+  @@unique([shoppingCartId, productId])
 }
-
