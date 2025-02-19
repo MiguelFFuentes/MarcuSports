@@ -4,6 +4,7 @@ import {CreateShoppingCartDto} from "../application/dtos/CreateShoppingCartDto";
 import {MissingProductOptionsError} from "../domain/exceptions/MissingProductOptionsError";
 import {OutOfStockError} from "../domain/exceptions/OutOfStockError";
 import {IncompatibleOptionsError} from "../domain/exceptions/IncompatibleOptionsError";
+import {DuplicatedPartError} from "../domain/exceptions/DuplicatedPartError";
 
 export class ShoppingCartController {
     constructor(private shoppingCartService: ShoppingCartService) {
@@ -17,7 +18,8 @@ export class ShoppingCartController {
             if (
                 error instanceof MissingProductOptionsError ||
                 error instanceof OutOfStockError ||
-                error instanceof IncompatibleOptionsError
+                error instanceof IncompatibleOptionsError ||
+                error instanceof  DuplicatedPartError
             ) {
                 res.status(400).json({error: error.message})
                 return

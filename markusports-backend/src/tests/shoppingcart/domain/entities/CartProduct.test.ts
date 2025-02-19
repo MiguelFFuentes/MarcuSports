@@ -3,6 +3,7 @@ import {MissingProductOptionsError} from "@shoppingcart/domain/exceptions/Missin
 import {OutOfStockError} from "@shoppingcart/domain/exceptions/OutOfStockError";
 import {IncompatibleOptionsError} from "@shoppingcart/domain/exceptions/IncompatibleOptionsError";
 import {getMockNoSelectionCartProduct} from "@helpers/shoppingcart/CartProductHelper";
+import {DuplicatedPartError} from "@shoppingcart/domain/exceptions/DuplicatedPartError";
 
 describe('CartProduct', () => {
 
@@ -14,6 +15,11 @@ describe('CartProduct', () => {
     it('should raise an error if every part is not selected', () => {
         cartProduct.selectOptions([1])
         expect(() => cartProduct.validate()).toThrow(MissingProductOptionsError)
+    })
+
+    it('should raise an error if a part is selected more than once', () => {
+        cartProduct.selectOptions([1, 2, 3])
+        expect(() => cartProduct.validate()).toThrow(DuplicatedPartError)
     })
 
     it('should raise an error if a selected option has no stock', () => {

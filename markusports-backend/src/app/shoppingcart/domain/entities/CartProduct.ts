@@ -3,6 +3,7 @@ import {CartPartId} from "../valueobjects/CartPartId";
 import {MissingProductOptionsError} from "../exceptions/MissingProductOptionsError";
 import {OutOfStockError} from "../exceptions/OutOfStockError";
 import {IncompatibleOptionsError} from "../exceptions/IncompatibleOptionsError";
+import {DuplicatedPartError} from "../exceptions/DuplicatedPartError";
 
 export class CartProduct {
 
@@ -22,14 +23,14 @@ export class CartProduct {
     }
 
     selectOptions(optionIds: number[]) {
-        this.selectedOptions = [
-            ...this.selectedOptions,
-            ...this.options.filter(option => optionIds.includes(option.id))
-        ]
+        const newSelectedOptions = this.options.filter(option => optionIds.includes(option.id))
+        newSelectedOptions.forEach(option => option.stock--)
+        this.selectedOptions = [...this.selectedOptions, ...newSelectedOptions]
     }
 
     validate() {
         this.validateAllPartsSelected()
+        this.validateDuplicatedParts()
         this.validateStock()
         this.validateIncompatibleOptions()
     }
@@ -48,9 +49,18 @@ export class CartProduct {
         })
     }
 
+    private validateDuplicatedParts() {
+        const selectedPartIds = this.selectedOptions.map(option => option.partId)
+        const duplicates = selectedPartIds.filter((partId, index) => selectedPartIds.indexOf(partId) !== index)
+        if (duplicates.length > 0) {
+            throw new DuplicatedPartError(this.id, duplicates)
+        }
+
+    }
+
     private validateStock() {
         this.selectedOptions.forEach(option => {
-            if (option.stock <= 0) {
+            if (option.stock < 0) {
                 throw new OutOfStockError(this.id, option.id)
             }
         })
