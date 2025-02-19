@@ -7,7 +7,8 @@ export function getMockPrismaShoppingCart() {
                 product: {
                     id: 1,
                     name: 'Super bike',
-                    stock: 10,
+                    description: 'This is a test product',
+                    price: 19.99,
                     parts: [
                         {
                             id: 1,
@@ -81,7 +82,32 @@ export function getMockPrismaShoppingCart() {
                         }
                     ]
                 },
-                selectedOptions: []
+                selectedOptions: [
+                    {
+                        id: 1,
+                        name: 'Red color',
+                        stock: 2,
+                        incompatibleOptions: [
+                            {
+                                id: 5,
+                                name: 'Medium size',
+                                stock: 0,
+                                partId: 2,
+                                incompatibleOptions: []
+                            }
+                        ],
+                        symmetricIncompatibleOptions: [],
+                        partId: 1
+                    },
+                    {
+                        id: 3,
+                        name: 'Big size',
+                        stock: 3,
+                        incompatibleOptions: [],
+                        symmetricIncompatibleOptions: [],
+                        partId: 2
+                    },
+                ]
             }
         ]
     }

@@ -1,10 +1,11 @@
 import {ShoppingCartRepository} from "../../domain/repositories/ShoppingCartRepository";
 import {ShoppingCart} from "../../domain/entities/ShoppingCart";
-import {PrismaClient} from "@prisma/client";
+import {PrismaClient, ShoppingCart as PrismaShoppingCart} from "@prisma/client";
 import {getPrismaClient} from "../../../core/PrismaService";
 import {PrismaShoppingCartMapper} from "../mappers/PrismaShoppingCartMapper";
 import {CartProduct} from "../../domain/entities/CartProduct";
 import {CartOption} from "../../domain/entities/CartOption";
+import PrismaShoppingCartQuery from "./PrismaShoppingCartQuery";
 
 export class PrismaShoppingCartRepository implements ShoppingCartRepository {
 
@@ -13,38 +14,17 @@ export class PrismaShoppingCartRepository implements ShoppingCartRepository {
 
     async createShoppingCart(): Promise<ShoppingCart> {
         const shoppingCart = await this.prisma.shoppingCart.create({
-            include: {
-                products: {
-                    include: {
-                        selectedOptions: {
-                            include: {
-                                incompatibleOptions: true,
-                                symmetricIncompatibleOptions: true
-                            }
-                        },
-                        product: {
-                            include: {
-                                parts: {
-                                    include: {
-                                        options: {
-                                            include: {
-                                                incompatibleOptions: true,
-                                                symmetricIncompatibleOptions: true
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            include: PrismaShoppingCartQuery
         })
         return PrismaShoppingCartMapper.toDomain(shoppingCart)
     }
 
-    getShoppingCart(id: number): Promise<ShoppingCart> {
-        throw new Error("Method not implemented.")
+    async getShoppingCart(id: number): Promise<ShoppingCart> {
+        const shoppingCart = await this.prisma.shoppingCart.findUnique({
+            where: {id},
+            include: PrismaShoppingCartQuery
+        }) as PrismaShoppingCart
+        return PrismaShoppingCartMapper.toDomain(shoppingCart)
     }
 
     async save(cart: ShoppingCart): Promise<ShoppingCart> {

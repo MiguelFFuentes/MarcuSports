@@ -1,7 +1,10 @@
 import {PrismaShoppingCartRepository} from "@shoppingcart/infrastructure/repositories/PrismaShoppingCartRepository";
 import {PrismaClient} from "@prisma/client";
 import {getMockEmptyShoppingCart, getMockShoppingCart} from "@helpers/shoppingcart/ShoppingCartHelper";
-import {getMockPrismaEmptyShoppingCart} from "@helpers/shoppingcart/PrismaShoppingCartHelper";
+import {
+    getMockPrismaEmptyShoppingCart,
+    getMockPrismaShoppingCart
+} from "@helpers/shoppingcart/PrismaShoppingCartHelper";
 
 describe('PrismaShoppingCartRepository', () => {
 
@@ -12,7 +15,8 @@ describe('PrismaShoppingCartRepository', () => {
         prismaClient = {
             shoppingCart: {
                 create: jest.fn().mockResolvedValue(getMockPrismaEmptyShoppingCart()),
-                update: jest.fn()
+                update: jest.fn(),
+                findUnique: jest.fn().mockImplementation((_) => getMockPrismaShoppingCart())
             },
             shoppingCartProduct: {
                 upsert: jest.fn()
@@ -49,6 +53,23 @@ describe('PrismaShoppingCartRepository', () => {
             expect(prismaClient.shoppingCart.update).toHaveBeenCalled()
             expect(prismaClient.shoppingCartProduct.upsert).toHaveBeenCalled()
             expect(prismaClient.productPartOption.update).toHaveBeenCalled()
+        })
+    })
+
+    describe('getShoppingCart', () => {
+
+        it('should get a shopping cart', async () => {
+            const expectedShoppingCart = getMockShoppingCart()
+
+            const shoppingCart = await prismaShoppingCartRepository.getShoppingCart(1)
+
+            expect(shoppingCart).toEqual(expectedShoppingCart)
+        })
+
+        it('should call the prisma client', async () => {
+            await prismaShoppingCartRepository.getShoppingCart(1)
+
+            expect(prismaClient.shoppingCart.findUnique).toHaveBeenCalled()
         })
     })
 })
