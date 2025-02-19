@@ -116,3 +116,10 @@ them, a type needs to be created manually based on Prisma.ProductGetPayload and 
 
 However, this is not working as expected. Types still give some issues so there I've decided to move forward for now and
 use `any` type for mapping the nested ORM entity as `ProductParts`.
+
+## Shopping cart validation
+There are 4 validations that are being done on the shopping cart. A product is valid:
+- If the options have stock
+- If the options are compatible
+- if the options are not duplicated or a part is selected twice
+- If the product has every part selected
