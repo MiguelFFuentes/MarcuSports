@@ -2,7 +2,6 @@ import {ShoppingCartRepository} from "../../domain/repositories/ShoppingCartRepo
 import {ShoppingCart} from "../../domain/entities/ShoppingCart";
 import {PrismaClient} from "@prisma/client";
 import {getPrismaClient} from "../../../core/PrismaService";
-import {ShoppingCartMapper} from "../../application/mappers/ShoppingCartMapper";
 import {PrismaShoppingCartMapper} from "../mappers/PrismaShoppingCartMapper";
 import {CartProduct} from "../../domain/entities/CartProduct";
 import {CartOption} from "../../domain/entities/CartOption";
@@ -42,6 +41,10 @@ export class PrismaShoppingCartRepository implements ShoppingCartRepository {
             }
         })
         return PrismaShoppingCartMapper.toDomain(shoppingCart)
+    }
+
+    getShoppingCart(id: number): Promise<ShoppingCart> {
+        throw new Error("Method not implemented.")
     }
 
     async save(cart: ShoppingCart): Promise<ShoppingCart> {
