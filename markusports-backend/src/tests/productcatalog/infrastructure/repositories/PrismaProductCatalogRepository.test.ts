@@ -16,7 +16,7 @@ describe('PrismaProductCatalogRepository', () => {
                 findUnique: jest.fn().mockResolvedValue(getMockPrismaProducts()[0])
             }
         } as unknown as PrismaClient
-        prismaProductCatalogRepository = new PrismaProductCatalogRepository(prismaClient as PrismaClient)
+        prismaProductCatalogRepository = new PrismaProductCatalogRepository(prismaClient)
     });
 
     describe('findAll', () => {

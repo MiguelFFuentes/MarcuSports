@@ -4,12 +4,12 @@ import {
     Prisma,
     PrismaClient,
 } from "@prisma/client";
-import {getPrismaClient} from "../../../core/PrismaService";
-import {PrismaProductMapper} from "./PrismaProductMapper";
+import {getPrismaClient} from "@core/PrismaService";
+import {PrismaProductMapper} from "../mappers/PrismaProductMapper";
 
 export class PrismaProductCatalogRepository implements ProductCatalogRepository {
 
-    private productQuery: Prisma.ProductSelect ={
+    private productQuery: Prisma.ProductSelect = {
         parts: {
             include: {
                 options: {

@@ -61,3 +61,66 @@ export function getMockCartProducts() {
     ]
 }
 
+export function getMockCartProducts2(): CartProduct[] {
+    return [
+        new CartProduct(
+            1,
+            'Super bike',
+            'This is a product for testing',
+            29.99,
+            [
+                {
+                    id: 1,
+                    name: "Red color",
+                    stock: 10,
+                    incompatibleOptions: [
+                        {
+                            id: 2,
+                            name: "Green color",
+                            stock: 5,
+                            incompatibleOptions: [],
+                            partId: 1
+                        },
+                        {
+                            id: 3,
+                            name: "Big size",
+                            stock: 8,
+                            incompatibleOptions: [],
+                            partId: 2
+                        }
+                    ],
+                    partId: 1
+                },
+                {
+                    id: 2,
+                    name: "Green color",
+                    stock: 5,
+                    incompatibleOptions: [
+                        {
+                            id: 1,
+                            name: "Red color",
+                            stock: 10,
+                            incompatibleOptions: [],
+                            partId: 1
+                        }
+                    ],
+                    partId: 1
+                }
+            ],
+            [],
+            [{id: 1}],
+            undefined
+        ),
+        new CartProduct(
+            2,
+            'Mega bike',
+            'This is a product for testing',
+            19.99,
+            [],
+            [],
+            [],
+            undefined
+        )
+    ]
+}
+
