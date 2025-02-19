@@ -1,6 +1,9 @@
 import {ShoppingCartService} from "../application/services/ShoppingCartService";
 import {NextFunction, Request, Response} from 'express'
 import {CreateShoppingCartDto} from "../application/dtos/CreateShoppingCartDto";
+import {MissingProductOptionsError} from "../domain/exceptions/MissingProductOptionsError";
+import {OutOfStockError} from "../domain/exceptions/OutOfStockError";
+import {IncompatibleOptionsError} from "../domain/exceptions/IncompatibleOptionsError";
 
 export class ShoppingCartController {
     constructor(private shoppingCartService: ShoppingCartService) {
@@ -8,11 +11,19 @@ export class ShoppingCartController {
 
     async createShoppingCart(req: Request<CreateShoppingCartDto>, res: Response, next: NextFunction) {
         try {
-            const shoppingCart = await this.shoppingCartService.createShoppingCart(req.body);
-            res.status(201).json(shoppingCart);
+            const shoppingCart = await this.shoppingCartService.createShoppingCart(req.body)
+            res.status(201).json(shoppingCart)
         } catch (error) {
-            console.error('Error in POST /shoppingcart:', error);
-            next(error);
+            if (
+                error instanceof MissingProductOptionsError ||
+                error instanceof OutOfStockError ||
+                error instanceof IncompatibleOptionsError
+            ) {
+                res.status(400).json({error: error.message})
+                return
+            }
+            console.error('Error in POST /shoppingcart:', error)
+            next(error)
         }
     }
 }

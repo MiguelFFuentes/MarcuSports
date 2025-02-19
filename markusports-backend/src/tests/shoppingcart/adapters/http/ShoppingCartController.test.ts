@@ -5,6 +5,7 @@ import {shoppingCartRepositoryStub} from "../../../stubs/ShoppingCartRepositoryS
 import {shoppingCartProductRepositoryStub} from "../../../stubs/ShoppingCartProductRepositoryStub";
 import {CreateShoppingCartDto} from "@shoppingcart/application/dtos/CreateShoppingCartDto";
 import {GetShoppingCartDto} from "@shoppingcart/application/dtos/GetShoppingCartDto";
+import {MissingProductOptionsError} from "@shoppingcart/domain/exceptions/MissingProductOptionsError";
 
 describe('ShoppingCartController', () => {
 
@@ -63,6 +64,18 @@ describe('ShoppingCartController', () => {
 
             expect(nextMock).toHaveBeenCalled()
             expect(consoleMock).toHaveBeenCalledWith('Error in POST /shoppingcart:', error)
+        })
+
+        it('should return a 400 status when the error is from the domain', async () => {
+            const error = new MissingProductOptionsError(1, 2)
+            const consoleMock = jest.spyOn(console, 'error')
+                .mockImplementation()
+            createShoppingCartMock.mockRejectedValue(error)
+
+            await shoppingCartController.createShoppingCart(requestMock, responseMock, nextMock)
+
+            expect(responseMock.status).toHaveBeenCalledWith(400)
+            expect(responseMock.json).toHaveBeenCalledWith({error: error.message})
         })
     })
 })
