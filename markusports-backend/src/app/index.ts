@@ -10,6 +10,7 @@ dotenv.config();
 const app = express()
 
 // Middlewares
+app.use(express.json())
 app.use(cors())
 
 // Routers
