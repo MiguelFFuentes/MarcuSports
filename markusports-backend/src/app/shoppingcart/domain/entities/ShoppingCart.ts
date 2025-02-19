@@ -5,7 +5,7 @@ export class ShoppingCart {
 
     constructor(
         public id: number,
-        public shoppingCartStatus: ShoppingCartStatus,
+        public status: ShoppingCartStatus,
         private products: CartProduct[]
     ) {
         // We do this in the constructor so every ShoppingCart instance is valid

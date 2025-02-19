@@ -37,6 +37,7 @@ function getMockPrismaProductPartOptions() {
                     name: "Green color",
                     stock: 5,
                     incompatibleOptions: [],
+                    partId: 1
 
                 },
                 {
@@ -44,8 +45,10 @@ function getMockPrismaProductPartOptions() {
                     name: "Big size",
                     stock: 8,
                     incompatibleOptions: [],
+                    partId: 2
                 }],
-            symmetricIncompatibleOptions: []
+            symmetricIncompatibleOptions: [],
+            partId: 1
         },
         {
             id: 2,
@@ -58,8 +61,10 @@ function getMockPrismaProductPartOptions() {
                     name: "Red color",
                     stock: 10,
                     incompatibleOptions: [],
+                    partId: 1
                 }
-            ]
+            ],
+            partId: 1
         },
         {
             id: 3,
@@ -72,16 +77,19 @@ function getMockPrismaProductPartOptions() {
                     name: "Red color",
                     stock: 10,
                     incompatibleOptions: [],
+                    partId: 1
 
                 }
-            ]
+            ],
+            partId: 2
         },
         {
             id: 4,
             name: "Small size",
             stock: 0,
             incompatibleOptions: [],
-            symmetricIncompatibleOptions: []
+            symmetricIncompatibleOptions: [],
+            partId: 2
         }
     ]
 }
