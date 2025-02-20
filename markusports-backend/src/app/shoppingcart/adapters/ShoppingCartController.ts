@@ -44,4 +44,19 @@ export class ShoppingCartController {
             next(error)
         }
     }
+
+    async updateShoppingCart(req: Request, res: Response, next: NextFunction) {
+        try {
+            const shoppingCartId = parseInt(req.params.id)
+            const shoppingCart = await this.shoppingCartService.updateShoppingCart(shoppingCartId, req.body)
+            res.json(shoppingCart)
+        } catch (error) {
+            if (error instanceof ShoppingCartNotFoundError) {
+                res.status(404).json({error: error.message})
+                return
+            }
+            console.error('Error in PUT /shoppingcarts/:id:', error)
+            next(error)
+        }
+    }
 }

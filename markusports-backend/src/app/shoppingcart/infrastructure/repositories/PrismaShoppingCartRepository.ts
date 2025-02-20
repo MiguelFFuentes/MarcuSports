@@ -1,13 +1,15 @@
 import {ShoppingCartRepository} from "../../domain/repositories/ShoppingCartRepository";
 import {ShoppingCart} from "../../domain/entities/ShoppingCart";
 import {PrismaClient, ShoppingCart as PrismaShoppingCart} from "@prisma/client";
-import {getPrismaClient} from "../../../core/PrismaService";
+import {getPrismaClient, runAsPrismaTransaction} from "../../../core/PrismaService";
 import {PrismaShoppingCartMapper} from "../mappers/PrismaShoppingCartMapper";
 import {CartProduct} from "../../domain/entities/CartProduct";
 import {CartOption} from "../../domain/entities/CartOption";
 import {PrismaShoppingCartQuery} from "./PrismaShoppingCartQuery";
 
 export class PrismaShoppingCartRepository implements ShoppingCartRepository {
+
+    runAsTransaction = runAsPrismaTransaction
 
     constructor(private prisma: PrismaClient = getPrismaClient()) {
     }

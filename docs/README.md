@@ -131,3 +131,11 @@ There are 4 validations that are being done on the shopping cart. A product is v
 For this alpha version, products are not grouped on a shopping cart even if the options are exactly the same. This can
 be changed with a migration in the `ShoppingCartProduct` schema adding a quantity column. This has not been included
 since it adds extra complexity.
+
+## Transactions shoppingcart
+
+When a user creates or updates a shopping cart, there are a few operations that need to be done in a transaction,
+otherwise, the database might end up in an inconsistent state.
+
+In order to handle these operations, Prisma provides the `$transaction` API that allows to group operations. I've used
+this with `runAsTransaction` variable to group the operations in the service.
