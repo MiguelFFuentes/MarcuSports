@@ -9,5 +9,6 @@ export const shoppingCartRepositoryStub: ShoppingCartRepository = {
             return getMockShoppingCart()
         }
         return undefined
-    })
+    }),
+    runAsTransaction: jest.fn().mockImplementation((fn: (transaction: any) => Promise<any>) => fn({}))
 }
