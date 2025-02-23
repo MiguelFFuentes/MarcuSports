@@ -1,7 +1,7 @@
-import { mount, flushPromises } from '@vue/test-utils'
+import {flushPromises, mount} from '@vue/test-utils'
 import {afterEach, describe, expect, it, vi} from 'vitest'
-import { defineComponent, ref } from 'vue'
-import { useProducts } from '@/composables/useProducts'
+import {defineComponent} from 'vue'
+import {useProducts} from '@/composables/useProducts/useProducts'
 import productCatalogService from '@/services/ProductCatalog/ProductCatalogService'
 
 describe('useProducts', () => {

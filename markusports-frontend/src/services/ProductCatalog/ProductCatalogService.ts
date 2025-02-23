@@ -7,5 +7,9 @@ class ProductCatalogService {
     const {data} = await client.get<Product[]>('/products')
     return data;
   }
+  async getProduct(productId: number): Promise<Product> {
+    const {data} = await client.get<Product>('/products/' + productId)
+    return data;
+  }
 }
 export default new ProductCatalogService()
