@@ -7,10 +7,16 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    LoadingProducts: typeof import('./src/components/LoadingProducts/LoadingProducts.vue')['default']
-    Product: typeof import('./src/components/ProductList/Product.vue')['default']
+    AlertError: typeof import('./src/components/AlertError/AlertError.vue')['default']
+    CartProduct: typeof import('./src/components/CartProduct/CartProduct.vue')['default']
+    Error: typeof import('./src/components/Error/Error.vue')['default']
+    Header: typeof import('./src/components/Header/Header.vue')['default']
+    ListProduct: typeof import('./src/components/ListProduct/ListProduct.vue')['default']
+    LoadingProducts: typeof import('./src/components/SkeletonProducts/LoadingProducts.vue')['default']
+    Product: typeof import('./src/components/Product/Product.vue')['default']
     ProductList: typeof import('./src/components/ProductList/ProductList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SkeletonProducts: typeof import('./src/components/SkeletonProducts/SkeletonProducts.vue')['default']
   }
 }
