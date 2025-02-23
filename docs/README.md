@@ -177,3 +177,9 @@ populates the database with some data. This script is automatically included whe
 and has been configured through the package.json.
 
 If you want to restart the database to the initial state, you can run `npx prisma migrate reset`.
+
+## TDD
+
+As a branch strategy, I've decided to use trunk based development and use main as a trunk branch. This is because I'm
+the only developer on this project and I wanted to make small commits, making the git tree cleaner and easier to
+understand.
