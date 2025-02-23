@@ -10,6 +10,7 @@ export class ShoppingCartMapper {
                     id: product.id,
                     name: product.name,
                     price: product.price,
+                    image: product.image,
                     selectedOptions: product.getSelectedOptions().map(option => option.name)
                 }
             })
