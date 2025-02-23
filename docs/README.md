@@ -8,17 +8,22 @@ and write everything in this folder as a journal in this file.
 ## Choosing the stack
 
 Since I am familiar with Express.js I decided to use it for this project as it meets the requirements.
-For the frontend, I chose Vue as it is a framework I am familiar with and it is easy to use.
+
+For the frontend, I chose Vue as it is a framework I am familiar with, and it is easy to use. I also decided to use
+Vuetify, because even though a nice design was not requested, it helps to build pages, provides a lot of functionality
+and helps with different screen resolutions.
+
 For testing, I chose Jest as it is a popular testing framework.
 
 ## Monorepo
 
-I've decided to use a monorepo structure because it is easier to manage the project and I can share this docs on a
+I've decided to use a monorepo structure because it is easier to manage the project and I can share these docs on a
 common folder, so it's easier for you as well.
 
 ## DDD & ports and adapters
 
-I used a DDD approach on this project and use hex architecture because it helps to understand the business rules related
+On the backend, I used a DDD approach on this project and use hex architecture because it helps to understand the
+business rules related
 with this online shop and the code is more maintainable.
 This architecture might help in the future to split this project into microservices if it gets bigger and makes sense to
 have each part with its own lifecycle.
@@ -27,6 +32,8 @@ So far, I've decided to use the following subdomains:
 
 - **Shopping Cart**
 - **Product Catalog**
+
+For the frontend, I've followed the typical Vue scaffolding structure.
 
 ## Using Product instead of Bicycle
 
@@ -41,7 +48,10 @@ I used the mirror test folder structure to organize better the code in the backe
 found.
 
 I used TDD as much as possible to drive my development focusing in the minimal functionality needed. Most things have
-been tested on this project with unit tests, there are also some feature tests for the main flows.
+been tested on this project with unit tests.
+
+I've also planned feature tests and there is an skeleton to perform one of them for one of the main flows of the
+application. Due to the lack of time, this flow has not been implemented yet, but it's prepared to future versions
 
 ## SQL vs NoSQL
 
@@ -135,7 +145,35 @@ since it adds extra complexity.
 ## Transactions shoppingcart
 
 When a user creates or updates a shopping cart, there are a few operations that need to be done in a transaction,
-otherwise, the database might end up in an inconsistent state.
+otherwise, the database might end up in an inconsistent state. This is because two users can add the same product at the
+same time and the stock might be negative if the validations and the update operations are not executed in a
+transaction.
 
 In order to handle these operations, Prisma provides the `$transaction` API that allows to group operations. I've used
 this with `runAsTransaction` variable to group the operations in the service.
+
+## Frontend state management
+
+For this alpha version, the only thing that would be is needed to keep in the state is the shopping cart.
+
+However, I've decided to keep it simple for this alpha version and just store the shopping cart id, since it reduces the
+complexity and the value to the user is the same for now.
+
+So I've decided to use a ShoppingCartStore interface with an implementation in the session storage.
+
+In the future, adding the shopping cart in the app state would provide the user an enhanced experience, for example,
+displaying how
+many products there are in the cart. In order to achieve this, the Vuex or pinia store could be used.
+
+## Frontend composables
+
+Most of the logic has been moved to Composables acording to Vue standards. This makes the components more readable and
+only with the logic related to the view.
+
+## Prisma seeding
+
+Since the backoffice app may be a bit technical for Marcus for this alpha version, I've created a seeding script that
+populates the database with some data. This script is automatically included when you run ` npx prisma migrate reset`
+and has been configured through the package.json.
+
+If you want to restart the database to the initial state, you can run `npx prisma migrate reset`.
