@@ -18,7 +18,7 @@ You need to have installed:
 ### Backend
 
 ```bash
-cd markusports-frontend
+cd markusports-backend
 npm install
 ```
 
