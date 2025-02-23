@@ -20,6 +20,7 @@ You need to have installed:
 ```bash
 cd markusports-backend
 ```
+
 ```bash
 npm install
 ```
@@ -39,15 +40,15 @@ backend folder.
 npx prisma migrate dev
 ```
 
-This command will run all the migrations to setup the database. It's also configured to run the `seed.ts` script to
-populate
-the database with some data. For more context about this seeding, please check the docs folder.
+This command will run all the migrations to set up the database.
 
-Any time you want to reset the data in the database, run:
-
+I've also configured a command to run the `seed.ts` script to
+populate the database with some data.
 ```bash
 npx prisma migrate reset
 ```
+
+From this point, any time you want to reset the data in the database, run the previous command.
 
 Run:
 
@@ -64,6 +65,7 @@ Navigate to http://localhost:3001, and you should see a handshake with the API.
 ```bash
 cd markusports-frontend
 ```
+
 ```bash
 npm install
 ```
