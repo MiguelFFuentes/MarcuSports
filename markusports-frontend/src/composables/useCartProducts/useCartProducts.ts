@@ -1,12 +1,12 @@
 import {computed, onMounted, ref} from "vue";
 import ShoppingCartManager from "@/services/ShoppingCart/ShoppingCartManager/ShoppingCartManager";
 import {useRouter} from "vue-router";
-import type {CartProduct} from "@/models/ShoppingCart";
+import type {CartProduct, ShoppingCart} from "@/models/ShoppingCart";
 
 export function useCartProducts() {
 
   const loading = ref(false)
-  const cart = ref()
+  const cart = ref<ShoppingCart>()
   const router = useRouter()
   const error = ref()
 
