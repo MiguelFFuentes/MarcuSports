@@ -1,9 +1,9 @@
 import {mount} from '@vue/test-utils'
 import {describe, it, expect} from 'vitest'
-import Product from '@/components/ProductList/Product.vue'
+import Product from '@/components/ListProduct/ListProduct.vue'
 import vuetify from "@/plugins/vuetify";
 
-describe('Product.vue', () => {
+describe('ListProduct.vue', () => {
   const product = {
     id: 1,
     name: 'Product 1',
