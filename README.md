@@ -19,6 +19,8 @@ You need to have installed:
 
 ```bash
 cd markusports-backend
+```
+```bash
 npm install
 ```
 
@@ -61,6 +63,8 @@ Navigate to http://localhost:3001, and you should see a handshake with the API.
 
 ```bash
 cd markusports-frontend
+```
+```bash
 npm install
 ```
 
