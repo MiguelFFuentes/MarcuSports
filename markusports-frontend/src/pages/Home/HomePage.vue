@@ -8,6 +8,9 @@
     <v-row>
       <SkeletonProducts v-if="loading && !error" :products-count="6" />
       <Error v-if="error" :error="error"/>
+      <v-col v-if="products && products.length === 0" cols="12" class="text-center">
+        No products found
+      </v-col>
       <v-col v-for="product in products" :key="product.id" cols="12" sm="6" md="4" lg="3">
         <ListProduct :product="product" />
       </v-col>

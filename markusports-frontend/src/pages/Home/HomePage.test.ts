@@ -51,4 +51,15 @@ describe('HomePage.vue', () => {
     const wrapper = mount(HomePage, {global: {plugins: [vuetify]}})
     expect(wrapper.findAllComponents(Product).length).toBe(2)
   })
+
+  it('should render a message when no products are found', () => {
+    useProducts.mockReturnValue({
+      products: [],
+      loading: false,
+      error: null
+    })
+
+    const wrapper = mount(HomePage, {global: {plugins: [vuetify]}})
+    expect(wrapper.text()).toContain('No products found')
+  })
 })
